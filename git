@@ -1,0 +1,251 @@
+Git Cheat Sheet
+MarkdownGithub
+初始化仓库
+初始化仓库
+git init
+初始化裸仓库
+git init --bare
+克隆仓库
+git clone <git-repo>
+配置
+编辑配置文件
+git config [--global] -e
+列出配置信息
+git config -l
+获取相应的配置
+git config --get core.editor
+配置用户邮箱
+git config --global user.email <mail>
+配置用户名
+git config --global user.name <name>
+输出彩色信息
+git config color.ui true
+设置文件名大小写敏感
+git config core.ignoreCase false
+设置推送策略为 simple
+git config push.default simple
+设置 git 的编辑器是 vim
+git config --global core.editor vim
+设置命令别名
+git config --global alias.co checkout
+忽略文件
+添加本项目的忽略文件
+vim .gitignore
+添加本项目的忽略文件并不把此文件纳入版本管理
+vim .git/info/exclude
+设置全局忽略文件
+git config --global core.excludesfile ~/.gitignore
+对已加入版本管理的文件不做更改检查
+git update-index --assume-unchanged <file>
+对已加入版本管理的文件做更改检查
+git update-index --no-assume-unchanged <file>
+添加删除移动文件
+添加所有文件到暂存区，包括未追踪文件
+git add -A
+更新暂存区文件
+git add -u
+交互式添加文件到暂存区
+git add -p
+工作区与暂存区删除文件
+git rm <file>
+仅暂存区删除文件
+git rm --cached <file>
+重命名暂存区文件
+git mv <file> <file1>
+工作区状态
+查看工作区的信息
+git status
+查看工作区信息并显示分支及追踪信息
+git status -sb
+并查看忽略文件的信息
+git status --ignored
+列出忽略文件
+git check-ignore *
+显示更改
+显示工作区与暂存区的不同
+git diff
+显示暂存区与本地仓库的不同
+git diff --cached
+显示工作区，暂存区与本地仓库的不同
+git diff HEAD
+仅显示改变的文件
+git diff --name-only
+比较两次提交的差异
+git diff <commit> <commit>
+显示某次 commit 所做的更改
+git show <commit>
+列出文件信息
+列出暂存区文件
+git ls-files
+列出忽略文件与未追踪文件
+git ls-files -o
+子目录中显示所在位置
+git ls-files --full-name
+储藏与恢复
+储藏(stash)工作区相对暂存区更改的文件
+git stash
+储藏文件并添加描述信息
+git stash save <message>
+恢复最后一次储藏的文件
+git stash apply
+恢复最后一次储藏的文件并删除此次储存记录
+git stash pop
+查看储藏列表
+git stash list
+恢复工作区
+重置工作区某文件
+git checkout -- <file>
+重置工作区
+git checkout .
+列出将要清除的未追踪文件
+git clean -n
+清除未追踪文件
+git clean -f
+清除忽略文件
+git clean -Xf
+清除未追踪目录及文件
+git clean -df
+回退版本
+重置暂存区
+git reset
+重置工作区和暂存区
+git reset --hard
+恢复本分支到某次提交，重置工作区与暂存区
+git reset --hard <commit-ish>
+恢复本分支到某次提交
+git reset --soft <commit-ish>
+恢复本分支到某次提交，重置暂存区
+git reset --mixed <commit-ish>
+反向恢复一个提交并生成新的提交
+git revert <commit>
+分支
+列出本地分支
+git branch
+列出本地分支与追踪关系
+git branch -vv
+列出远程分支
+git branch -r
+列出所有分支
+git branch -a
+建立分支不切换工作区
+git branch <branch>
+删除已被合并的分支
+git branch -d <branch>
+强制删除未被合并的分支
+git branch -D <branch>
+更改分支名字
+git branch -m <newbranch>
+设置追踪分支
+git branch -u <upstream>
+切换分支
+切换分支
+git checkout <branch>
+建立分支并切换工作区
+git checkout -b <branch>
+切换到最近一次分支
+git checkout -
+建立无任何提交历史的分支
+git checkout --orphan <branch>
+合并分支
+合并 develop 分支到本分支
+git merge develop
+强制合并分支后生成 merge commit
+git merge -no-ff develop
+变基合并 develop 分支
+git rebase develop
+变基进入交互式界面
+git rebase -i
+远程仓库
+添加远程仓库并命名为 origin
+git remote add origin <git-repo>
+修改远程仓库的地址
+git remote set-url origin <git-repo>
+列出所有的远程仓库
+git remote -v
+列出远程仓库 origin 的详细信息
+git remote show origin
+推送与拉取
+git config push.default simple
+设置默认推送策略为 simple
+推送 master 到远程仓库
+git push origin master
+推送到远程仓库并建立追踪关系
+git push -u origin master
+推送时忽略 pre-push hook
+git push -n
+从远程仓库拉取文件
+git pull origin master
+设置 rebase 模式拉取代码
+git pull --rebase origin master
+提交
+提交
+git commit -m <message>
+追加提交重置提交信息
+git commit --amend -m <message>
+重置作者
+git commit --amend --author=<mail>
+允许空提交
+git commit --allow-empty
+提交时跳过 pre-commit hook
+git commit -n
+日志
+显示提交日志
+git log
+显示某文件的提交日志
+git log -p <file>
+以图表形式显示提交日志
+git log --graph --all --oneline --decorate
+显示每次提交的对象信息
+git log --pretty=raw
+显示某个时间段的提交信息
+git log --since '2 days ago'
+显示指定作者的提交信息
+git log --author=<author>
+根据提交信息中的关键字查找
+git log --grep=<keyword>
+列出二者特有的提交
+git log master...develop
+列出 branch 有而 branch2 没有的提交
+git log branch2..branch
+仅显示 merge commit
+git log --merges
+统计每个作者的提交情况
+git shortlog
+统计每个作者的提交个数
+git shortlog -sn
+标签
+列出所有标签并显示标签信息
+git tag -ln
+添加一个标签
+git tag -a v1.0.0 -m <message>
+在某个 commit 上添加一个标签
+git tag v0.9.0 <commit>
+删除一个标签
+git tag -d v1.0.0
+查看某个标签信息
+git show v1.0.0
+推送所有标签到远程仓库
+git push --tags
+使用最近的标签描述本次提交
+git describe
+追责（甩锅）
+找到最后一次提交的作者
+git blame <file>
+找到具体某一段的最后一次提交
+git blame -L 10,18 <file>
+查找文件的修改历史及明细
+git log -p <file>
+确认坏的提交
+二分查找坏的提交
+git bisect start <br> git checkout HEAD~20 <br> git bisect good <br> git bisect bad <br> git bisect reset
+git 对象
+获取改摘要信息的类型
+git cat-file -t <hash>
+获取改摘要信息的内容
+git cat-file -p <hash>
+查找
+在已追踪文件中查找关键字并指明行号
+git grep -n hello
+打包
+打包
+git archive -o arch.zip HEAD
